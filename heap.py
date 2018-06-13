@@ -41,7 +41,7 @@ def heap_sort(array):
 		max_heapify(array, 1)
 	return array_sorted
 
-for i in range(100000):
+for i in range(10000):
 	heap_sort([12, 420, 1, 69, 0])
 
 

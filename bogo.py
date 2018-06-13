@@ -17,12 +17,13 @@ def is_sorted(array):
 			return False
 	return True
 
-def bogosort(array):
+def bogo_sort(array):
 	while True:
 		if is_sorted(array):
 			return array
 		else:
 			array = shuffle(array)
 
-print bogosort([2, 420, 1, 3, 5, 0, 4, 90, 69])
+for i in range(10000):
+	bogo_sort([12, 420, 1, 69, 0])
 
