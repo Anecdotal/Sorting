@@ -1,20 +1,33 @@
-#Function radix-sorts a list of nonnegative integers (obviously the radix will be 10, unless the integers are in binary or other bases).
-#The exponent parameter defines how many digits are in the integer list given (in other words, 10^x).
-def radix_sort(intList, exponent, radix):
+#Radix-sorts a list of nonnegative integers
+#'array' is a given unsorted array with numbers in some base ('radix'), normally 10
+#Each number in the list can have a maximum number of digits 'exponent' (in other words, radix to what exponent is expressed in the highest number)
+def radix_sort(array, exponent, radix):
 	for i in range(exponent):
-		qList = []
+		bucketList = []
 		for k in range(radix):
+			bucketList.append([])
+		for x in array:
+			bucketList[x % (radix**(i+1)) / (radix**(i))].append(x)
+		array = []
+		for j in bucketList:
+			if j != []:
+				array.extend(j)
+	return array
+
+#This version of the algorithm is less generalized, with radix of 10 and exponent as 3
+#This way, the function only takes in one input, rendering it easier for generalized speed testing
+def radix_sort_base10(array):
+	for i in range(3):
+		qList = []
+		for k in range(10):
 			qList.append([])
-		for x in intList:
-			qList[x % (radix**(i+1)) / (radix**(i))].append(x)
-		intList = []
+		for x in array:
+			qList[x % (10**(i+1)) / (10**(i))].append(x)
+		array = []
 		for j in qList:
 			if j != []:
-				intList.extend(j)
-	return intList
-
-for i in range(100000):
-	radix_sort([1, 420, 1, 123, 15, 120, 987, 789, 69, 00], 3, 10)
+				array.extend(j)
+	return array
 
 '''
 print radix_sort([19, 35, 20, 61, 14], 2, 10)
